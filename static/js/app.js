@@ -58,14 +58,12 @@ function updateFilters() {
   function filterTable() {
   
     // 8. Set the filtered data to the tableData.
-    let entryData = d3.select('#datetime', '#city', '#state', '#country', '#shape').property('value');
     let filteredData = tableData;
     
     // 9. Loop through all of the filters and keep any data that
     // matches the filter values
-    if (entryData) {
-      filteredData = filteredData.filter(row => row.datetime === entryData);
-    };
+    Object.entries(filters).forEach(([key, value]) => {filteredData = filteredData.filter(row => row[key] === value);
+    });
     
     // 10. Finally, rebuild the table using the filtered data
     buildTable(filteredData);
